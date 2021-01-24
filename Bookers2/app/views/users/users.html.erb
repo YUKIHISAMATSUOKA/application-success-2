@@ -1,0 +1,14 @@
+<h1>これはユーザー　一覧ページです</h1>
+<table class=table>
+  <tr>
+    <th>image</th>
+    <th>name</th>
+  </tr>
+<% @users.each do |user| %>
+ <tr class="users">
+　 <td><span><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></span></td>
+　 <td><span><%= user.name %></span></td>
+　 <td><span><%= link_to "show", user_path(user) %></span></td>
+<% end %>
+  </tr>
+</table>
