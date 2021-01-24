@@ -1,0 +1,11 @@
+2021年1月24日　日曜日12時22分
+Bootstrap及びFontAwesome投入直前のBookers2をgithubにアップロードした
+Excelに記載のあるここまでの内容
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+GemfieにBootstrap FontAwesome導入のためのコードを記述する
+bundle install
+app/assets/stylesheetsの「application.css」を「application.scss」に変更
+BootstrapをSCSSに読み込ませる
+app/assets/javascriptsフォルダのapplication.jsファイルを開き、追記する
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
