@@ -23,7 +23,7 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id #UserとBookは1対Nの関係にあるので、誰が投稿するのかを宣言している
     if @book.save
       flash[:notice] = "You have created book successfully."
-      redirect_to books_path
+      redirect_to book_path(@book)
     else
       render action: :index
     end
@@ -36,6 +36,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book_new = Book.new
     @book = Book.find(params[:id])
   end
 
@@ -54,7 +55,7 @@ class BooksController < ApplicationController
   def correct_user
     @book = Book.find(params[:id])
     unless @book.user.id == current_user.id
-      redirect_to book_path(@book)
+      redirect_to books_path
     end
   end
 end

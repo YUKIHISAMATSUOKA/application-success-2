@@ -4,10 +4,11 @@ class UsersController < ApplicationController
 
 
   def show
+    @book = Book.new
     @user = User.find(params[:id])
     #ユーザ（@user）に関連付けられた投稿（.post_images）のみ、@post_imagesに渡すことができる。
     #この下に自分の投稿したものだけ表示するメソッドを書く
-    @books = current_user.books.all
+    @books = @user.books.all
   end
 
   def edit
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def users
+    @book = Book.new
     @users = User.all
   end
 
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     unless @user.id == current_user.id
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user)
     end
   end
 end

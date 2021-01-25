@@ -9,47 +9,81 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+ <body class="d-flex flex-column vh-100">
+    <header class="bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item-bookers">
+              <%= link_to "Bookers", "/", class: 'nav-link text-white' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to user_path(current_user.id), class: 'nav-link text-white', method: :get do %>
+                <i class="fas fa-home">Home</i>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_path, class: 'nav-link text-white', method: :get do %>
+                <i class="fas fa-users">Users</i>
+              <% end %>
+           </li>
+           <li class="nav-item">
+             <%= link_to books_path, class: 'nav-link text-white', method: :get do %>
+               <i class="fas fa-book-open">Books</i>
+             <% end %>
+           </li>
+           <li class="nav-item">
+             <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white', method: :delete do %>
+               <i class="fas fa-sign-out-alt">logout</i>
+             <% end %>
+           </li>
+           <% else %>
+           <li class="nav-item-bookers">
+             <%= link_to "Booekers", "/", class: 'nav-link text-white' %>
+           </li>
+           <li class="nav-item">
+             <%= link_to "/", class: 'nav-link text-white', method: :get do %>
+               <i class="fas fa-home">Home</i>
+             <% end %>
+            </li>
+           <li class="nav-item">
+             <%= link_to home_about_path, class: 'nav-link text-white', method: :get do %>
+               <i class="fas fa-link">About</i>
+             <% end %>
+           </li>
+           <li class="nav-item">
+             <%= link_to new_user_registration_path, class: 'nav-link text-white', method: :get do %>
+               <i class="fas fa-user-plus">sign up</i>
+             <% end %>
+           </li>
+           <li class="nav-item">
+             <%= link_to new_user_session_path, class: 'nav-link text-white', method: :get do %>
+               <i class="fas fa-sign-in-alt">login</i>
+             <% end %>
+           </li>
+           <% end %>
+           </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     <% if flash[:notice] %>
        <div class="flash-green"><%= flash[:notice] %></div>
 　　<% end %>
-
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "Booekers", "/" %>
-      </li>
-      <li>
-        <%= link_to "Home", user_path(current_user.id) %>
-      </li>
-      <li>
-        <%= link_to "Users", users_path %>
-      </li>
-      <li>
-        <%= link_to "Books", books_path %>
-      </li>
-      <li>
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      </li>
-
-    <% else %>
-      <li>
-        <%= link_to "Booekers", "/" %>
-      </li>
-      <li>
-        <%= link_to "Home", "/" %>
-      </li>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-       <%= link_to "sign up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "login", new_user_session_path %>
-      </li>
-    <% end %>
+    <main class="mb-auto">
     <%= yield %>
-
-
+    </main>
+    <footer class="bg-white text-dark pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-4"></div>
+          <div class="col-md-8"><h6 class="text-red mt-2 mb-3">CopyRight Infratop.inc</h6></div>
+        </div>
+    </footer>
   </body>
 </html>
